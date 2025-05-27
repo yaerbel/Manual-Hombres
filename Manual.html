@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-B">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Manual para Construir un Hombre</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- PLAN NARRATIVO:
+        1. Título e Introducción: Presentar el "Manual para construir un hombre" y su promesa irónica.
+        2. Paso 1: Compra Cosas que no Necesitas: Visualizar la construcción de identidad a través de objetos.
+        3. Paso 2: Reprime tus Emociones: Ilustrar la supresión emocional como fortaleza.
+        4. Paso 3: Compite. Siempre.: Mostrar la competencia constante.
+        5. Paso 4: Calla. No Pidas Ayuda.: Representar el sufrimiento en silencio.
+        6. Paso 5: Construye Muros, No Vínculos.: Visualizar el aislamiento.
+        7. Paso 6: Si no Encajas, Destruye.: Ilustrar la reacción destructiva.
+        8. Paso 7: Interpreta un Papel. Todo el Tiempo.: Mostrar la actuación constante.
+        9. Conclusión: Hombre Completo: El resultado final: "Vacío, pero completo."
+    -->
+    <!-- SELECCIÓN DE VISUALIZACIONES:
+        - Introducción: Texto destacado. Goal: Inform. Method: HTML/Tailwind. NO SVG.
+        - Paso 1:
+            - Data: "Construye tu identidad con cosas."
+            - Goal: Inform/Compare (metafóricamente).
+            - Visualization: HTML/CSS para representar una pila de objetos. Donut Chart (Chart.js) "Identidad = 100% Cosas".
+            - Justification: Visualizar la acumulación. Chart.js para proporción. NO SVG.
+        - Paso 2:
+            - Data: "No sientas. Ser fuerte es callar."
+            - Goal: Inform.
+            - Visualization: HTML/CSS ícono rostro con boca sellada.
+            - Justification: Representación visual de la represión. NO SVG.
+        - Paso 3:
+            - Data: "Compite. Contra todos."
+            - Goal: Compare (metafóricamente).
+            - Visualization: Bar Chart (Chart.js) "Nivel de Competencia".
+            - Justification: Mostrar omnipresencia de competencia. Chart.js para comparación. NO SVG.
+        - Paso 4:
+            - Data: "No hables. No pidas ayuda."
+            - Goal: Inform.
+            - Visualization: "Single Big Number" (HTML/Tailwind) "0 Ayuda Solicitada".
+            - Justification: Impacto directo. NO SVG.
+        - Paso 5:
+            - Data: "Construye muros. Aíslate."
+            - Goal: Organize/Inform.
+            - Visualization: HTML/CSS figura rodeada de muros.
+            - Justification: Representación literal del aislamiento. NO SVG.
+        - Paso 6:
+            - Data: "Cuando ya no puedas más, rompe todo."
+            - Goal: Change/Inform.
+            - Visualization: HTML/CSS elementos rotos.
+            - Justification: Visualizar la destrucción. NO SVG.
+        - Paso 7:
+            - Data: "Interpreta al fuerte, al exitoso."
+            - Goal: Inform.
+            - Visualization: HTML/CSS máscaras.
+            - Justification: Representar la actuación. NO SVG.
+        - Conclusión:
+            - Data: "Hombre Completo... Vacío, pero completo."
+            - Goal: Inform/Compare.
+            - Visualization: Donut Chart (Chart.js) "Completitud" vs "Contenido Emocional".
+            - Justification: Mostrar dualidad irónica. Chart.js para proporciones. NO SVG.
+        - CONFIRMACIÓN: NI MERMAID JS NI SVG FUERON UTILIZADOS EN ESTA SALIDA.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6; /* Gris claro Tailwind */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            border-left: 5px solid #0369A1; /* Acento azul - sky-700 */
+        }
+        .card-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            color: #075985; /* Color principal azul oscuro - sky-800 */
+            margin-bottom: 1rem;
+        }
+        .card-subtitle {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 700;
+            color: #FB923C; /* Acento naranja - orange-400 */
+            margin-bottom: 0.75rem;
+        }
+        .card-text {
+            color: #374151; /* gray-700 */
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Ajustado para infografía */
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px; /* Ajustado para infografía */
+            max-height: 300px; /* Ajustado para infografía */
+        }
+        .icon-display {
+            font-size: 3rem;
+            text-align: center;
+            margin: 1rem 0;
+            color: #0369A1; /* sky-700 */
+        }
+        .big-number {
+            font-size: 4rem; /* text-6xl */
+            font-weight: 900; /* font-black */
+            color: #FB923C; /* orange-400 */
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .wall-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .wall {
+            width: 20px;
+            height: 80px;
+            background-color: #78716C; /* stone-500 */
+            margin: 0 2px;
+            border: 1px solid #57534E; /* stone-600 */
+        }
+        .person-icon {
+            font-size: 2rem;
+            color: #0369A1; /* sky-700 */
+            margin: 0 10px;
+        }
+        .broken-item {
+            width: 30px;
+            height: 30px;
+            background-color: #DC2626; /* red-600 */
+            margin: 5px;
+            transform: rotate(15deg);
+            border: 2px dashed #B91C1C; /* red-700 */
+        }
+        .mask-icon {
+            display: inline-block;
+            width: 40px;
+            height: 30px;
+            border: 2px solid #075985; /* sky-800 */
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            position: relative;
+            margin: 0.5rem;
+        }
+        .mask-icon::before, .mask-icon::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #075985; /* sky-800 */
+            border-radius: 50%;
+            top: 10px;
+        }
+        .mask-icon::before { left: 10px; }
+        .mask-icon::after { right: 10px; }
+
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 50;
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-link {
+            color: #075985; /* sky-800 */
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #E0F2FE; /* sky-100 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-sky-800 text-white p-8 text-center">
+        <h1 class="text-4xl font-black mb-2">Manual para Construir un Hombre</h1>
+        <p class="text-xl text-sky-200">Una exploración visual de sus irónicas instrucciones.</p>
+    </header>
+
+    <nav class="nav-sticky mb-8">
+        <ul class="container mx-auto flex flex-wrap justify-center space-x-2 sm:space-x-4 text-sm sm:text-base">
+            <li><a href="#intro" class="nav-link">Introducción</a></li>
+            <li><a href="#paso1" class="nav-link">Paso 1</a></li>
+            <li><a href="#paso2" class="nav-link">Paso 2</a></li>
+            <li><a href="#paso3" class="nav-link">Paso 3</a></li>
+            <li><a href="#paso4" class="nav-link">Paso 4</a></li>
+            <li><a href="#paso5" class="nav-link">Paso 5</a></li>
+            <li><a href="#paso6" class="nav-link">Paso 6</a></li>
+            <li><a href="#paso7" class="nav-link">Paso 7</a></li>
+            <li><a href="#conclusion" class="nav-link">Conclusión</a></li>
+        </ul>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <section id="intro" class="md:col-span-2 card">
+                <h2 class="card-title">Bienvenido al Manual Definitivo</h2>
+                <p class="card-text">Este manual promete guiarte, paso a paso y sin errores, en la construcción de un hombre adaptado a la sociedad moderna. El resultado garantizado es tan atractivo como inquietante: productividad, obediencia... y un vacío difícil de llenar. Acompáñanos a desglosar sus preceptos.</p>
+            </section>
+
+            <section id="paso1" class="card">
+                <h3 class="card-title">Paso 1: Compra Cosas que no Necesitas</h3>
+                <p class="card-subtitle">"Construye tu identidad con cosas. Muchas cosas."</p>
+                <p class="card-text">El primer paso establece que la identidad se forja a través de la acumulación material. Cada objeto se convierte en un ladrillo en tu "castillo de apariencias". La advertencia es clara: si no lo tienes, no existes. Y si lo pierdes, ¿quién eres?</p>
+                <div class="text-center my-4 p-4 bg-orange-100 border-l-4 border-orange-400 rounded">
+                    <span class="text-5xl">🛍️</span>
+                    <p class="font-semibold text-orange-700 mt-2">Tu Valor = Tus Posesiones</p>
+                </div>
+                <div class="chart-container mx-auto">
+                    <canvas id="identidadChart"></canvas>
+                </div>
+                <p class="card-text text-sm text-center mt-2">Metafóricamente, tu identidad se compone enteramente de lo que posees.</p>
+            </section>
+
+            <section id="paso2" class="card">
+                <h3 class="card-title">Paso 2: Reprime tus Emociones</h3>
+                <p class="card-subtitle">"No sientas. No llores, no dudes, no hables de lo que te duele."</p>
+                <p class="card-text">Ser hombre, según este manual, es sinónimo de ser fuerte, y ser fuerte implica callar. La tristeza, la duda y el dolor no tienen cabida. Las emociones deben ser suprimidas para mantener la fachada de fortaleza.</p>
+                <div class="icon-display">
+                    <span>👤</span> + <span>🔒</span> = <span>🤐</span>
+                </div>
+                <p class="card-text text-center font-semibold">Hombre + Candado Emocional = Silencio Impuesto</p>
+                <p class="card-text">La vulnerabilidad es presentada como una debilidad inaceptable.</p>
+            </section>
+
+            <section id="paso3" class="card">
+                <h3 class="card-title">Paso 3: Compite. Siempre.</h3>
+                <p class="card-subtitle">"Contra todos. Contra ti mismo. Eres lo que logras."</p>
+                <p class="card-text">La competencia es el motor. El valor de un hombre se mide por sus logros, sus victorias y lo que supera. Caer no es una opción visible; dudar requiere una sonrisa. Rendirse está prohibido, incluso ante la propia fractura interna.</p>
+                 <div class="chart-container mx-auto">
+                    <canvas id="competenciaChart"></canvas>
+                </div>
+                <p class="card-text text-sm text-center mt-2">La vida es una carrera constante donde solo importa ganar.</p>
+            </section>
+
+            <section id="paso4" class="card">
+                <h3 class="card-title">Paso 4: Calla. No Pidas Ayuda.</h3>
+                <p class="card-subtitle">"No hables. No pidas ayuda. No digas que estás mal."</p>
+                <p class="card-text">La resistencia y el sufrimiento en silencio son virtudes. Admitir debilidad o pedir ayuda te descalifica como "hombre". La autosuficiencia llevada al extremo del aislamiento.</p>
+                <div class="big-number">0</div>
+                <p class="card-text text-center font-bold text-xl">Veces que se pide ayuda.</p>
+                <p class="card-text">El silencio es la armadura, aunque por dentro todo esté roto.</p>
+            </section>
+
+            <section id="paso5" class="card">
+                <h3 class="card-title">Paso 5: Construye Muros, No Vínculos</h3>
+                <p class="card-subtitle">"No te conectes, no te abras, no confíes."</p>
+                <p class="card-text">Los vínculos emocionales son peligrosos; las emociones, una traición. La directriz es clara: construye muros, aíslate. Nadie debe saber lo que realmente sientes. La conexión genuina es una amenaza.</p>
+                <div class="wall-container">
+                    <div class="wall"></div>
+                    <div class="wall"></div>
+                    <div class="wall"></div>
+                    <span class="person-icon">🚶</span>
+                    <div class="wall"></div>
+                    <div class="wall"></div>
+                    <div class="wall"></div>
+                </div>
+                <p class="card-text text-center font-semibold">Aislamiento autoimpuesto como forma de "protección".</p>
+            </section>
+
+            <section id="paso6" class="card">
+                <h3 class="card-title">Paso 6: Si no Encajas, Destruye</h3>
+                <p class="card-subtitle">"Cuando ya no puedas más, rompe todo."</p>
+                <p class="card-text">Si no puedes cumplir con las expectativas, la respuesta es la destrucción. Golpea, grita, arde. Una forma desesperada de hacer que alguien sienta lo que tú no puedes expresar de otra manera.</p>
+                <div class="flex justify-center items-center my-4 space-x-2">
+                    <div class="broken-item transform -rotate-12"></div>
+                    <div class="text-4xl text-red-600">💥</div>
+                    <div class="broken-item transform rotate-6"></div>
+                </div>
+                <p class="card-text text-center font-semibold">La implosión se convierte en explosión.</p>
+            </section>
+
+            <section id="paso7" class="card md:col-span-2">
+                <h3 class="card-title">Paso 7: Interpreta un Papel. Todo el Tiempo.</h3>
+                <p class="card-subtitle">"No seas tú. Sé lo que esperan. Interpreta al fuerte, al exitoso, al invencible."</p>
+                <p class="card-text">La autenticidad no tiene valor en este sistema; todo, incluso uno mismo, debe venderse. La vida se convierte en una actuación constante, interpretando el papel asignado sin importar el costo interno. La máscara se fusiona con el rostro.</p>
+                <div class="flex justify-center items-center my-6 space-x-4">
+                    <div class="mask-icon" title="Máscara de Felicidad"></div>
+                    <div class="mask-icon" title="Máscara de Fortaleza"></div>
+                    <div class="mask-icon" title="Máscara de Éxito"></div>
+                </div>
+                <p class="card-text text-center font-semibold">La vida como una obra de teatro donde nunca bajas del escenario.</p>
+            </section>
+
+            <section id="conclusion" class="card md:col-span-2">
+                <h3 class="card-title">Hombre Completo... Felicidades.</h3>
+                <p class="card-text">Has seguido cada paso del manual: comprado, competido, callado, fingido. Has encerrado tu alma, enterrado tus emociones y roto tus reflejos. Ahora estás listo. Eres un hombre completo... Vacío, pero completo.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+                    <div class="text-center">
+                        <div class="chart-container mx-auto h-48 sm:h-56">
+                             <canvas id="completitudChart"></canvas>
+                        </div>
+                        <p class="card-text text-sm font-semibold mt-2">Nivel de "Completitud" según el Manual.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="chart-container mx-auto h-48 sm:h-56">
+                            <canvas id="contenidoEmocionalChart"></canvas>
+                        </div>
+                        <p class="card-text text-sm font-semibold mt-2">Nivel de "Contenido Emocional" Real.</p>
+                    </div>
+                </div>
+                <p class="card-text mt-6 text-center text-xl font-bold text-sky-700">Un producto perfecto de la sociedad moderna, con un costo interno incalculable.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="text-center p-8 mt-8 bg-sky-800 text-sky-200 text-sm">
+        <p>Infografía basada en "Manual para construir un hombre". Reflexión crítica sobre las presiones sociales.</p>
+        <p>&copy; 2024. Creado con fines ilustrativos y de concienciación.</p>
+    </footer>
+
+    <script>
+        const defaultTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        function processLabels(labels) {
+            return labels.map(label => {
+                if (typeof label === 'string' && label.length > 16) {
+                    const words = label.split(' ');
+                    const newLabel = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                            newLabel.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine += word + ' ';
+                        }
+                    });
+                    newLabel.push(currentLine.trim());
+                    return newLabel;
+                }
+                return label;
+            });
+        }
+        
+        // Chart para Paso 1: Identidad
+        const identidadCtx = document.getElementById('identidadChart');
+        if (identidadCtx) {
+            new Chart(identidadCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: processLabels(['Cosas Materiales']),
+                    datasets: [{
+                        label: 'Composición de la Identidad',
+                        data: [100],
+                        backgroundColor: ['#FB923C'], // orange-400
+                        borderColor: ['#F97316'], // orange-500
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: defaultTooltipOptions
+                    }
+                }
+            });
+        }
+
+        // Chart para Paso 3: Competencia
+        const competenciaCtx = document.getElementById('competenciaChart');
+        if (competenciaCtx) {
+            new Chart(competenciaCtx, {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['Nivel de Competencia']),
+                    datasets: [{
+                        label: 'Importancia Relativa',
+                        data: [95], // Un valor alto para la competencia
+                        backgroundColor: ['#0369A1'], // sky-700
+                        borderColor: ['#075985'], // sky-800
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100 }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: defaultTooltipOptions
+                    }
+                }
+            });
+        }
+        
+        // Chart para Conclusión: Completitud
+        const completitudCtx = document.getElementById('completitudChart');
+        if (completitudCtx) {
+            new Chart(completitudCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: processLabels(['Completitud (Según Manual)']),
+                    datasets: [{
+                        data: [100],
+                        backgroundColor: ['#0369A1'], // sky-700
+                        borderColor: ['#075985'], // sky-800
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: defaultTooltipOptions
+                    }
+                }
+            });
+        }
+
+        // Chart para Conclusión: Contenido Emocional
+        const contenidoEmocionalCtx = document.getElementById('contenidoEmocionalChart');
+        if (contenidoEmocionalCtx) {
+            new Chart(contenidoEmocionalCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: processLabels(['Vacío Emocional', 'Emociones Genuinas']),
+                    datasets: [{
+                        data: [90, 10], // Alto vacío, bajo contenido genuino
+                        backgroundColor: ['#FDBA74', '#BFDBFE'], // orange-300, blue-200
+                        borderColor: ['#FB923C', '#93C5FD'], // orange-400, blue-300
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth:15, padding:10 } },
+                        tooltip: defaultTooltipOptions
+                    }
+                }
+            });
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Calculate offset for sticky nav
+                    const navHeight = document.querySelector('.nav-sticky')?.offsetHeight || 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20; // 20px extra padding
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
